@@ -1,0 +1,13 @@
+{
+  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../dist/plotly",
+  "assets": [
+    "angular-plotly.png",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "lib": {
+    "entryFile": "src/public-api.ts"
+  }
+}

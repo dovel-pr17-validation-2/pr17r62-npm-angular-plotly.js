@@ -1,0 +1,184 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "cli": {
+    "cache": {
+      "enabled": false
+    }
+  },
+  "newProjectRoot": "projects",
+  "projects": {
+    "plotly": {
+      "projectType": "library",
+      "root": "projects/plotly",
+      "sourceRoot": "projects/plotly/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "options": {
+            "tsConfig": "projects/plotly/tsconfig.lib.json",
+            "project": "projects/plotly/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/plotly/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "main": "projects/plotly/src/test.ts",
+            "tsConfig": "projects/plotly/tsconfig.spec.json",
+            "karmaConfig": "projects/plotly/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/plotly/**/*.ts",
+              "projects/plotly/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "demo_app": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/demo_app",
+      "sourceRoot": "projects/demo_app/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "outputPath": {
+              "base": "dist/demo_app"
+            },
+            "index": "projects/demo_app/src/index.html",
+            "polyfills": [
+              "zone.js"
+            ],
+            "tsConfig": "projects/demo_app/tsconfig.app.json",
+            "assets": [
+              "projects/demo_app/src/favicon.ico",
+              "projects/demo_app/src/assets"
+            ],
+            "styles": [
+              "projects/demo_app/src/styles.css"
+            ],
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "plotly.js-dist"
+            ],
+            "browser": "projects/demo_app/src/main.ts"
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "5.25mb",
+                  "maximumError": "6mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kb",
+                  "maximumError": "6kb"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "demo_app:build:production"
+            },
+            "development": {
+              "buildTarget": "demo_app:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular/build:extract-i18n",
+          "options": {
+            "buildTarget": "demo_app:build"
+          }
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "tsConfig": "projects/demo_app/tsconfig.spec.json",
+            "assets": [
+              "projects/demo_app/src/favicon.ico",
+              "projects/demo_app/src/assets"
+            ],
+            "styles": [
+              "projects/demo_app/src/styles.css"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/demo_app/**/*.ts",
+              "projects/demo_app/**/*.html"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "analytics": false,
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
+  },
+  "schematics": {
+    "@schematics/angular:component": {
+      "type": "component"
+    },
+    "@schematics/angular:directive": {
+      "type": "directive"
+    },
+    "@schematics/angular:service": {
+      "type": "service"
+    },
+    "@schematics/angular:guard": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:interceptor": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:module": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:pipe": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:resolver": {
+      "typeSeparator": "."
+    }
+  }
+}

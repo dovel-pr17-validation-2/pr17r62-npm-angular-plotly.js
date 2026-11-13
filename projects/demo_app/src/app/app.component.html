@@ -1,0 +1,54 @@
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<header class="site-header">
+  <div class="shell header-inner">
+    <a class="brand" routerLink="/" (click)="closeNavigation()" aria-label="angular-plotly.js home">
+      <img src="assets/angular-plotly.png" alt="" width="44" height="44">
+      <span>angular-plotly.js</span>
+    </a>
+
+    <button
+      class="nav-toggle"
+      type="button"
+      [attr.aria-expanded]="navigationOpen"
+      aria-controls="primary-navigation"
+      (click)="toggleNavigation()">
+      <span class="sr-only">Toggle navigation</span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </button>
+
+    <nav
+      id="primary-navigation"
+      class="primary-navigation"
+      [class.is-open]="navigationOpen"
+      aria-label="Primary navigation">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="closeNavigation()">Overview</a>
+      <a routerLink="/examples" routerLinkActive="active" (click)="closeNavigation()">Examples</a>
+      <a routerLink="/loading" routerLinkActive="active" (click)="closeNavigation()">Loading Plotly</a>
+      <a class="nav-github" href="https://github.com/plotly/angular-plotly.js" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
+    </nav>
+  </div>
+</header>
+
+<main id="main-content">
+  <router-outlet></router-outlet>
+</main>
+
+<footer class="site-footer">
+  <div class="shell footer-inner">
+    <div>
+      <a class="brand footer-brand" routerLink="/">
+        <img src="assets/angular-plotly.png" alt="" width="36" height="36">
+        <span>angular-plotly.js</span>
+      </a>
+      <p>Plotly.js charts as Angular components.</p>
+    </div>
+    <div class="footer-links" aria-label="Project links">
+      <a href="https://github.com/plotly/angular-plotly.js#readme" target="_blank" rel="noopener">Documentation</a>
+      <a href="https://www.npmjs.com/package/angular-plotly.js" target="_blank" rel="noopener">npm</a>
+      <a href="https://github.com/plotly/angular-plotly.js" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+</footer>
